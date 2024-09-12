@@ -53,14 +53,16 @@ describe('Bank app', () => {
     cy.contains('[ng-hide="noAccount"]', 'Balance')
       .contains('strong', balance)
       .should('be.visible');
-
     cy.get('[ng-click="transactions()"]').click();
-      cy.get('.fixedTopBox > [style="float:left"]').click();
-      cy.get('[name="accountSelect"]').select(accountNumber2);
-      cy.get('[ng-class="btnClass1"]').click();
-      cy.get('.marTop').should('not.contain', '#anchor0 > :nth-child(3)');
+    cy.get('.fixedTopBox > [style="float:left"]').click();
 
-      cy.get('.logout').click();
-      cy.get('.mainhdr').should('not.contain', 'logout');
+    // Select the second account
+    cy.get('[name="accountSelect"]').select(accountNumber2);
+    cy.get('[ng-class="btnClass1"]').click();
+    cy.get('.marTop').should('not.contain', '#anchor0 > :nth-child(3)');
+
+    // Log out
+    cy.get('.logout').click();
+    cy.get('.mainhdr').should('not.contain', 'logout');
     });
 });
